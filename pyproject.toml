@@ -1,0 +1,22 @@
+# filename: pyproject.toml
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "createus-django-common"
+version = "0.1.0"
+description = "Shared Django utilities for Createus projects"
+requires-python = ">=3.11"
+dependencies = [
+    "Django>=4.2",
+    "djangorestframework>=3.14",
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["createus_common*"]

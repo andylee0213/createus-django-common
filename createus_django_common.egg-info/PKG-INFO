@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: createus-django-common
+Version: 0.1.0
+Summary: Shared Django utilities for Createus projects
+Requires-Python: >=3.11
+Requires-Dist: Django>=4.2
+Requires-Dist: djangorestframework>=3.14
