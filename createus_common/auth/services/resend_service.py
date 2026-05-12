@@ -1,0 +1,21 @@
+# filename: createus_common/auth/services/resend_service.py
+
+from resend import Emails
+
+
+class ResendService:
+
+    @classmethod
+    def send_email(
+        cls,
+        from_email,
+        to_email,
+        subject,
+        html,
+    ):
+        return Emails.send({
+            "from": from_email,
+            "to": [to_email],
+            "subject": subject,
+            "html": html,
+        })
