@@ -1,6 +1,12 @@
 # filename: createus_common/auth/services/resend_service.py
 
+import resend
+
+from django.conf import settings
 from resend import Emails
+
+
+resend.api_key = settings.RESEND_API_KEY
 
 
 class ResendService:
