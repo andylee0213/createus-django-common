@@ -80,7 +80,7 @@ class EmailVerificationCode(TimeStampedModel):
             update_fields=[
                 "status",
                 "verified_at",
-                "updated",
+                "updated_at",
             ]
         )
 
@@ -89,7 +89,7 @@ class EmailVerificationCode(TimeStampedModel):
         self.save(
             update_fields=[
                 "status",
-                "updated",
+                "updated_at",
             ]
         )
 
@@ -98,6 +98,6 @@ class EmailVerificationCode(TimeStampedModel):
         self.save(
             update_fields=[
                 "failed_attempt_count",
-                "updated",
+                "updated_at",
             ]
         )
