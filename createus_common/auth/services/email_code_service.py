@@ -63,7 +63,7 @@ class EmailCodeService:
                 code=code,
                 status=EmailVerificationCodeStatus.PENDING,
             )
-            .order_by("-created")
+            .order_by("-created_at")
             .first()
         )
 

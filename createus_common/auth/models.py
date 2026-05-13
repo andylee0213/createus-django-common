@@ -52,7 +52,7 @@ class EmailVerificationCode(TimeStampedModel):
     )
 
     class Meta:
-        ordering = ["-created"]
+        ordering = ["-created_at"]
         indexes = [
             models.Index(fields=["email", "code"]),
             models.Index(fields=["email", "status"]),
