@@ -31,7 +31,7 @@ class BaseEmailCodeRequestView(APIView):
 
     email_subject = "Your verification code"
 
-    email_sender = "noreply@example.com"
+    email_sender = "contact@createusinc.com"
 
     email_brand_name = "Createus"
 
