@@ -47,6 +47,13 @@ createus_common/billing/webhooks/__init__.py
 createus_common/billing/webhooks/toss.py
 createus_common/files/__init__.py
 createus_common/files/utils.py
+createus_common/messaging/__init__.py
+createus_common/messaging/apps.py
+createus_common/messaging/choices.py
+createus_common/messaging/models.py
+createus_common/messaging/serializers.py
+createus_common/messaging/utils.py
+createus_common/messaging/views.py
 createus_common/migrations/__init__.py
 createus_common/mixins/__init__.py
 createus_common/mixins/serializers.py

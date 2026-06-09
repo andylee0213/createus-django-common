@@ -2,18 +2,20 @@
 
 from django.urls import path
 
-from createus_common.auth.views import (
-    BaseEmailCodeRequestView,
-    BaseEmailCodeVerifyView,
+from createus_common.auth.public_views import (
+    PublicEmailCodeRequestView,
+    PublicEmailCodeVerifyView,
 )
 
 urlpatterns = [
     path(
         "request-code/",
-        BaseEmailCodeRequestView.as_view(),
+        PublicEmailCodeRequestView.as_view(),
+        name="createus_auth_request_code",
     ),
     path(
         "verify-code/",
-        BaseEmailCodeVerifyView.as_view(),
+        PublicEmailCodeVerifyView.as_view(),
+        name="createus_auth_verify_code",
     ),
 ]
