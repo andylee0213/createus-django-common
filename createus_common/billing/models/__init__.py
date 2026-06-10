@@ -5,6 +5,7 @@ from createus_common.billing.models.subscriptions import (
     AbstractUserSubscription,
 )
 from createus_common.billing.models.payments import AbstractPaymentTransaction
+from createus_common.billing.models.billing_keys import AbstractBillingKeyRecord
 from createus_common.billing.models.credits import (
     AbstractUsageCreditBalance,
     AbstractUsageCreditHistory,
@@ -15,6 +16,7 @@ __all__ = [
     "AbstractSubscriptionPlan",
     "AbstractUserSubscription",
     "AbstractPaymentTransaction",
+    "AbstractBillingKeyRecord",
     "AbstractUsageCreditBalance",
     "AbstractUsageCreditHistory",
     "AbstractReferralReward",

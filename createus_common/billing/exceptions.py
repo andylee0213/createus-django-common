@@ -34,5 +34,17 @@ class SubscriptionException(BillingException):
     """Raised for invalid subscription state transitions."""
 
 
+class BillingKeyIssueException(ProviderException):
+    """Raised when exchanging an authKey for a billingKey fails at the provider."""
+
+
+class BillingKeyChargeException(ProviderException):
+    """Raised when charging a stored billingKey fails at the provider."""
+
+
+class BillingKeyRevokeException(ProviderException):
+    """Raised when revoking a billingKey fails at the provider."""
+
+
 class WebhookVerificationException(BillingException):
     """Raised when a webhook signature or payload fails verification."""
