@@ -5,12 +5,37 @@ from __future__ import annotations
 import json
 from typing import Any
 
+from createus_common.billing.choices import PaymentStatus
 from createus_common.billing.exceptions import WebhookVerificationException
 from createus_common.billing.services.webhooks import AbstractWebhookService
 
 # TossPayments event types as of 2024
 PAYMENT_STATUS_CHANGED = "PAYMENT_STATUS_CHANGED"
 DEPOSIT_CALLBACK = "DEPOSIT_CALLBACK"
+
+# Maps TossPayments wire-format payment.status strings to the shared
+# PaymentStatus IntegerChoices. Keys are exactly as documented by Toss.
+_PAYMENT_STATUS_MAP: dict[str, PaymentStatus] = {
+    "DONE": PaymentStatus.DONE,
+    "CANCELED": PaymentStatus.CANCELLED,
+    "PARTIAL_CANCELED": PaymentStatus.PARTIAL_CANCELLED,
+    "ABORTED": PaymentStatus.ABORTED,
+    "EXPIRED": PaymentStatus.EXPIRED,
+    "FAILED": PaymentStatus.FAILED,
+}
+
+
+def normalize_toss_payment_status(toss_status: str) -> PaymentStatus | None:
+    """
+    Map a TossPayments wire-format ``payment.status`` string (as delivered in
+    ``PAYMENT_STATUS_CHANGED`` webhook payloads) to the shared ``PaymentStatus``
+    IntegerChoices value.
+
+    Returns ``None`` for status strings Toss has not documented; callers
+    should treat that as "ignore this event", not an error, since Toss may
+    add new status strings without notice.
+    """
+    return _PAYMENT_STATUS_MAP.get(toss_status)
 
 
 class TossWebhookHandler(AbstractWebhookService):
