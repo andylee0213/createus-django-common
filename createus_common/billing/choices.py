@@ -18,6 +18,8 @@ class SubscriptionStatus(models.IntegerChoices):
     PAUSED = 4, "Paused"
     CANCELLED = 5, "Cancelled"
     EXPIRED = 6, "Expired"
+    GRACE_PERIOD = 7, "Grace Period"
+    REVOKED = 8, "Revoked"
 
 
 class PaymentStatus(models.IntegerChoices):
@@ -34,6 +36,8 @@ class PaymentProvider(models.IntegerChoices):
     TOSS_PAYMENTS = 1, "Toss Payments"
     STRIPE = 2, "Stripe"
     PAYPAL = 3, "PayPal"
+    APP_STORE = 4, "Apple App Store"
+    GOOGLE_PLAY = 5, "Google Play"
 
 
 class PaymentMethodType(models.IntegerChoices):
@@ -72,3 +76,48 @@ class ReferralRewardStatus(models.IntegerChoices):
     PAID = 3, "Paid"
     EXPIRED = 4, "Expired"
     REJECTED = 5, "Rejected"
+
+
+# ── App Store / Google Play in-app-purchase choices ─────────────────────────
+#
+# These mirror the vocabularies used by Apple's App Store Server API /
+# Notifications V2 and are written to be equally sensible for a future
+# Google Play Real-time Developer Notifications integration.  Values that
+# are provider-defined small closed enums (offer type, revocation reason,
+# expiration intent, auto-renew status) are modeled as IntegerChoices for
+# admin/readability; values that are open-ended, provider-controlled strings
+# (transaction type, ownership type, transaction reason) are left as plain
+# CharFields on the models rather than enums here, so a new value Apple adds
+# tomorrow does not require a migration to store it.
+
+
+class StoreEnvironment(models.TextChoices):
+    SANDBOX = "sandbox", "Sandbox"
+    PRODUCTION = "production", "Production"
+
+
+class SubscriptionOfferType(models.IntegerChoices):
+    INTRODUCTORY = 1, "Introductory Offer"
+    PROMOTIONAL = 2, "Promotional Offer"
+    OFFER_CODE = 3, "Offer Code"
+    WIN_BACK = 4, "Win-Back Offer"
+
+
+class ExpirationIntent(models.IntegerChoices):
+    CUSTOMER_CANCELLED = 1, "Customer Cancelled"
+    BILLING_ERROR = 2, "Billing Error"
+    PRICE_INCREASE_NOT_CONSENTED = 3, "Price Increase Not Consented To"
+    PRODUCT_NOT_AVAILABLE = 4, "Product Not Available"
+    OTHER = 5, "Other"
+
+
+class RevocationReason(models.IntegerChoices):
+    REFUNDED_FOR_OTHER_REASON = 0, "Refunded for Other Reason"
+    REFUNDED_DUE_TO_ISSUE = 1, "Refunded Due to Issue"
+
+
+class NotificationProcessingStatus(models.IntegerChoices):
+    PENDING = 1, "Pending"
+    PROCESSED = 2, "Processed"
+    FAILED = 3, "Failed"
+    IGNORED = 4, "Ignored"

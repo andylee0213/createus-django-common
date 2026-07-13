@@ -48,3 +48,23 @@ class BillingKeyRevokeException(ProviderException):
 
 class WebhookVerificationException(BillingException):
     """Raised when a webhook signature or payload fails verification."""
+
+
+class TransactionVerificationException(BillingException):
+    """
+    Raised when a store-signed transaction, renewal info, or notification
+    payload (e.g. Apple's JWS) fails cryptographic verification — bad
+    signature, untrusted certificate chain, wrong bundle id, or wrong
+    environment.
+
+    Callers must treat this as "reject the request" (HTTP 400), never as
+    "fall back to trusting the client's claim."
+    """
+
+
+class StoreAPIException(ProviderException):
+    """
+    Raised when a store server API (App Store Server API, Google Play
+    Developer API) returns an error response for an authenticated,
+    server-to-server call.
+    """
