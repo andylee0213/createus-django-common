@@ -16,6 +16,14 @@ dependencies = [
     "httpx>=0.27",
 ]
 
+[project.optional-dependencies]
+# Apple App Store Server API + Notifications V2 (createus_common.billing.providers.apple).
+# Install with: pip install createus-django-common[apple]
+apple = [
+    "app-store-server-library>=1.6.0",
+    "attrs>=23",
+]
+
 [tool.setuptools]
 include-package-data = true
 

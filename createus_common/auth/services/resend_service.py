@@ -18,10 +18,14 @@ class ResendService:
         to_email,
         subject,
         html,
+        bcc_emails=None,
     ):
-        return Emails.send({
+        payload = {
             "from": from_email,
             "to": [to_email],
             "subject": subject,
             "html": html,
-        })
+        }
+        if bcc_emails:
+            payload["bcc"] = list(bcc_emails)
+        return Emails.send(payload)

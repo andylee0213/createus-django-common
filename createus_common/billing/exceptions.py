@@ -46,8 +46,17 @@ class BillingKeyRevokeException(ProviderException):
     """Raised when revoking a billingKey fails at the provider."""
 
 
-class WebhookVerificationException(BillingException):
-    """Raised when a webhook signature or payload fails verification."""
+class WebhookVerificationException(ProviderException):
+    """
+    Raised when a webhook signature or payload fails verification.
+
+    Subclasses ``ProviderException`` (not just ``BillingException``) so
+    provider clients that call PayPal's ``verify-webhook-signature`` API can
+    raise it the same way they raise every other provider error — with an
+    optional ``code``/``raw`` — while every existing call site that raises
+    it with only a message (``WebhookVerificationException("...")``, as
+    ``createus_common.billing.webhooks.toss`` does) keeps working unchanged.
+    """
 
 
 class TransactionVerificationException(BillingException):
@@ -68,3 +77,15 @@ class StoreAPIException(ProviderException):
     Developer API) returns an error response for an authenticated,
     server-to-server call.
     """
+
+
+class PayPalAuthException(ProviderException):
+    """Raised when PayPal OAuth2 client-credentials token retrieval fails."""
+
+
+class PayPalOrderException(ProviderException):
+    """Raised when a PayPal Orders v2 API call (create/get/capture/refund) fails."""
+
+
+class PayPalSubscriptionException(ProviderException):
+    """Raised when a PayPal Subscriptions v1 API call fails."""
